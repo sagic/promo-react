@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+import Immutable from 'immutable'
 
 // ------------------------------------
 // Constants
@@ -34,7 +34,7 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [USER_LOGIN]: function(state, action) {
+  [USER_LOGIN]: function (state, action) {
     // make async
     let res = {
       username: 'dummy user',
@@ -49,31 +49,36 @@ const ACTION_HANDLERS = {
         },
         previousVertical: 1
       }
-    };
-    return initialState.merge(res);
+    }
+    return initialState.merge(res)
   },
   [USER_LOGOUT]: (state, action) => initialState
-};
+}
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = Immutable.Map({
-  username: '',
-  email: '',
-  status: -1,
-  preferences: {
-    businessName: '',
-    businessLogo: {
-      url: '',
-      thumbUrl: '',
-      backgroundColor: '#fff'
-    },
-    previousVertical: null
+  ui: {
+    loading: false
+  },
+  model: {
+    username: '',
+    email: '',
+    status: -1,
+    preferences: {
+      businessName: '',
+      businessLogo: {
+        url: '',
+        thumbUrl: '',
+        backgroundColor: '#fff'
+      },
+      previousVertical: null
+    }
   }
-});
+})
 
-export default function userReducer(state=initialState, action) {
-  const handler = ACTION_HANDLERS[action.type];
+export default function userReducer (state = initialState, action) {
+  const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }
