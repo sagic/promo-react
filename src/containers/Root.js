@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { Router } from 'react-router'
 
 export default class Root extends React.Component {
+
   static propTypes = {
     history: PropTypes.object.isRequired,
     routes: PropTypes.element.isRequired,
@@ -26,8 +27,8 @@ export default class Root extends React.Component {
           window.devToolsExtension.open()
         }
       } else if (!window.devToolsExtension) {
-        // const DevTools = require('containers/DevTools').default
-        // return <DevTools />
+        const DevTools = require('containers/DevTools').default
+        return <DevTools />
       }
     }
   }
@@ -37,7 +38,9 @@ export default class Root extends React.Component {
       <Provider store={this.props.store}>
         <div style={{ height: '100%' }}>
           {this.content}
-          {this.devTools}
+          <div style={{ display: 'none' }}>
+            {this.devTools}
+          </div>
         </div>
       </Provider>
     )

@@ -15,6 +15,21 @@ export default (store) => (
     </Route>
     <Route path='about' component={AboutView} />
     <Route path='support' component={DummyView} />
-
+    <Route path='create' component={DummyView} >
+      <Route path='business-name' component={DummyView} />
+      <Route path='business-logo' component={DummyView} />
+      <Route path='vericals' component={DummyView} />
+      <Route path='themes' component={DummyView} >
+        <Route path='preview' component={DummyView} />
+      </Route>
+    </Route>
+    <Route path='generate' component={DummyView} />
+    <Route path='edit' component={DummyView} >
+      <Route path='customize' component={DummyView}>
+        <Route path='captions' component={DummyView} />
+        <Route path='music' component={DummyView} />
+      </Route>
+      <Route path='publish' component={DummyView} />
+    </Route>
   </Route>
 )
