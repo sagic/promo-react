@@ -2,12 +2,13 @@ import React, { PropTypes } from 'react'
 import '../../styles/core.scss'
 import Header from '../../components/header.comp'
 import Footer from '../../components/footer.comp'
+import classes from './CoreLayout.scss'
 
 function CoreLayout ({ children }) {
   return (
-    <div className='page-container'>
+    <div className={classes.wrapper}>
       <Header />
-      <div className='view-container'>
+      <div className={classes['content-wrapper']}>
         {children}
       </div>
       <Footer />

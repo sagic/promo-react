@@ -1,6 +1,7 @@
 'use strict'
 
 import React from 'react'
+import classes from './footer.comp.scss'
 
 class Footer extends React.Component {
   constructor (props) {
@@ -9,7 +10,7 @@ class Footer extends React.Component {
   }
   render () {
     return (
-      <div>Footer</div>
+      <div className={classes.container}>Footer</div>
     )
   }
 }

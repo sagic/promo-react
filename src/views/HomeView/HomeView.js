@@ -1,8 +1,8 @@
 /* @flow */
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router'
 import { increment, doubleAsync } from '../../redux/modules/counter'
-import DuckImage from './Duck.jpg'
 import classes from './HomeView.scss'
 
 // We can use Flow (http://flowtype.org/) to type our component's props
@@ -32,11 +32,7 @@ export class HomeView extends React.Component<void, Props, void> {
     return (
       <div className='container text-center'>
         <div className='row'>
-          <div className='col-xs-2 col-xs-offset-5'>
-            <img className={classes.duck}
-              src={DuckImage}
-              alt='This is a duck, because Redux.' />
-          </div>
+          <Link to='/create'>Create a Promo</Link>
         </div>
         <h1>Welcome to the React Redux Starter Kit</h1>
         <h2>

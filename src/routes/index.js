@@ -1,10 +1,13 @@
 import React from 'react'
-import { Route, IndexRoute } from 'react-router'
+import { Route, IndexRoute, IndexRedirect } from 'react-router'
 
 import CoreLayout from 'layouts/CoreLayout/CoreLayout'
 import HomeView from 'views/HomeView/HomeView'
-import DummyView from 'views/about.view'
+import DummyView from 'views/dummy.view'
 import AboutView from 'views/about.view'
+import CreateView from 'views/create.view'
+import BusinessNameContainer from 'containers/businessName.container'
+import BusinessLogoContainer from 'containers/businessLogo.container'
 
 export default (store) => (
   <Route path='/' component={CoreLayout}>
@@ -15,11 +18,12 @@ export default (store) => (
     </Route>
     <Route path='about' component={AboutView} />
     <Route path='support' component={DummyView} />
-    <Route path='create' component={DummyView} >
-      <Route path='business-name' component={DummyView} />
-      <Route path='business-logo' component={DummyView} />
-      <Route path='vericals' component={DummyView} />
-      <Route path='themes' component={DummyView} >
+    <Route path='create' component={CreateView} >
+      <IndexRedirect to='business-name' />
+      <Route path='business-name' title='Business Name' component={BusinessNameContainer} />
+      <Route path='business-logo' title='Business Logo' component={BusinessLogoContainer} />
+      <Route path='vericals' title='Choose Vertical' component={DummyView} />
+      <Route path='themes' title='Choose Theme' component={DummyView} >
         <Route path='preview' component={DummyView} />
       </Route>
     </Route>
@@ -31,5 +35,6 @@ export default (store) => (
       </Route>
       <Route path='publish' component={DummyView} />
     </Route>
+    <Route path='viewer' component={DummyView} />
   </Route>
 )

@@ -1,4 +1,4 @@
-import Immutable from 'immutable';
+import Immutable from 'immutable'
 
 // ------------------------------------
 // Constants
@@ -11,6 +11,9 @@ export const PROMO_GENERATED = 'PROMO_GENERATED'
 export const PROMO_CREATE_FINAL = 'PROMO_CREATE_FINAL'
 export const PROMO_CREATED_FINAL = 'PROMO_CREATED_FINAL'
 export const PROMO_UPDATE_TITLE = 'PROMO_UPDATE_TITLE'
+
+export const LOAD_VERTICALS = 'LOAD_VERTICALS'
+export const LOAD_THEMES = 'LOAD_THEMES'
 
 export const UPLOAD_LOGO = 'UPLOAD_LOGO'
 export const UPLOAD_IMAGE = 'UPLOAD_IMAGE'
@@ -74,6 +77,19 @@ export function updateTitle (title) {
   }
 }
 
+export function loadVerticals () {
+  return {
+    type: LOAD_VERTICALS
+  }
+}
+
+export function loadThemes (verticalId) {
+  return {
+    type: LOAD_THEMES,
+    verticalId
+  }
+}
+
 export function uploadLogo (payload) {
   return {
     type: UPLOAD_LOGO,
@@ -105,45 +121,63 @@ export const actions = {
 // Action Handlers
 // ------------------------------------
 const ACTION_HANDLERS = {
-  [PROMO_LOAD]: (state, action) => initialState.set('ui', 'loading', true),
-  [PROMO_CREATE_NEW]: (state, action) => initialState
-};
+  [PROMO_LOAD]: (state, action) => initialState.setIn(['ui', 'loading'], true),
+  [PROMO_CREATE_NEW]: (state, action) => initialState,
+  [LOAD_VERTICALS]: (state, action) => {
+    console.log('AAAAA')
+    let test = initialState.setIn(['create', 'verticals'], [1, 2, 3])
+    return test
+  },
+  [LOAD_THEMES]: (state, action) => initialState.setIn(['create', 'themes'], [1, 2, 3])
+}
 
 // ------------------------------------
 // Reducer
 // ------------------------------------
 const initialState = Immutable.Map({
-  ui: {
-    loading: false,
-    generating: false
-  },
-  model: {
-    hash: '',
-    title: '',
-    music: {
-      id: '',
+  create: {
+    ui: {
+      loading: false,
+      uploading: false,
+      generating: false
+    },
+    model: {
+      hash: '',
       title: '',
-      artist: '',
-      thumbnailUrl: '',
-      url: ''
+      music: {
+        id: '',
+        title: '',
+        artist: '',
+        thumbnailUrl: '',
+        url: ''
+      },
+      decoration: {},
+      decorationImages: [],
+      video: {
+        url: ''
+      },
+      ratio: '16:9',
+      duration: 15,
+      theme: '5655ba2196f2c8f38012ce8f',
+      vertical: '',
+      videoUrl: '',
+      videoThumb: '',
+      createdAt: '',
+      businessName: ''
     },
-    decoration: {},
-    decorationImages: [],
-    video: {
-      url: ''
+    verticals: [],
+    themes: []
+  },
+  dashboard: {
+    ui: {
+      loading: false
     },
-    ratio: '16:9',
-    duration: 15,
-    theme: '5655ba2196f2c8f38012ce8f',
-    vertical: '',
-    videoUrl:'',
-    videoThumb: '',
-    createdAt: '',
-    businessName: ''
+    drafts: [],
+    published: []
   }
-});
+})
 
-export default function promoReducer(state = initialState, action) {
-  const handler = ACTION_HANDLERS[action.type];
+export default function promoReducer (state = initialState, action) {
+  const handler = ACTION_HANDLERS[action.type]
   return handler ? handler(state, action) : state
 }
